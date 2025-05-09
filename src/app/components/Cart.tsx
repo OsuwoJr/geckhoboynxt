@@ -5,17 +5,6 @@ import { useCartStore } from '../store/cartStore';
 import Image from 'next/image';
 import '../styles/cart.css';
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  stage: string;
-  notes: string;
-  transactionId: string;
-}
-
 export default function Cart() {
   const [isOpen, setIsOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
