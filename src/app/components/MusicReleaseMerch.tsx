@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useCartStore } from '../store/cartStore';
 import type { CartStore } from '../store/cartStore';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface MerchItem {
   id: string;

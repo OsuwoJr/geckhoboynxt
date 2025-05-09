@@ -21,13 +21,7 @@ export default function Cart() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [paymentCompleted, setPaymentCompleted] = useState(false);
-
-  const { items, removeItem, updateQuantity, clearCart, getTotal } = useCartStore();
-  const total = getTotal();
-
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
@@ -37,6 +31,9 @@ export default function Cart() {
     notes: '',
     transactionId: ''
   });
+
+  const { items, removeItem, updateQuantity, clearCart, getTotal } = useCartStore();
+  const total = getTotal();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -60,15 +57,10 @@ export default function Cart() {
     setIsCheckingOut(true);
   };
 
-  const handlePaymentComplete = () => {
-    setPaymentCompleted(true);
-    setIsPaymentModalOpen(false);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!paymentCompleted) {
+    if (!showSuccess) {
       setErrorMessage('Please complete the payment first');
       return;
     }
@@ -108,7 +100,6 @@ export default function Cart() {
           notes: '',
           transactionId: ''
         });
-        setPaymentCompleted(false);
       } else {
         setErrorMessage('Failed to submit order. Please try again.');
       }
@@ -313,7 +304,6 @@ export default function Cart() {
                   onClick={() => {
                     // Open Swypt payment in a new window
                     window.open('https://swypt.io/pay', '_blank');
-                    setIsPaymentModalOpen(true);
                   }}
                 >
                   Pay Now
@@ -321,7 +311,6 @@ export default function Cart() {
                 <button 
                   type="submit" 
                   className="submit-btn"
-                  disabled={!paymentCompleted}
                 >
                   Place Order
                 </button>
