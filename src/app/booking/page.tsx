@@ -55,7 +55,7 @@ export default function BookingPage() {
       } else {
         setErrorMessage('There was an error submitting the form. Please try again.');
       }
-    } catch (error) {
+    } catch {
       setErrorMessage('There was an error submitting the form. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -78,13 +78,13 @@ export default function BookingPage() {
         <div className="container">
           <div className="header-content">
             <h1>Book GECKHOBOY</h1>
-            <p className="subtitle">Let's create something extraordinary together</p>
+            <p className="subtitle">Let&apos;s create something extraordinary together</p>
           </div>
 
           {showSuccess ? (
             <div className="success-message">
               <h2>Thank You!</h2>
-              <p>Your booking request has been submitted successfully. We'll get back to you shortly.</p>
+              <p>Your booking request has been submitted successfully. We&apos;ll get back to you shortly.</p>
               <button 
                 className="new-booking-btn" 
                 onClick={() => setShowSuccess(false)}

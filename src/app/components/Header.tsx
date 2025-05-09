@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMusic } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube, faSpotify, faApple } from '@fortawesome/free-brands-svg-icons';
+import Link from 'next/link';
 import Cart from './Cart';
 
 const platforms = [
@@ -47,9 +48,9 @@ const Header: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 bg-black z-[1000] border-b border-[#333333]">
       <div className="max-w-[1200px] mx-auto px-4 py-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:px-8 md:py-4 md:gap-8">
-        <a href="/" className="text-2xl font-bold text-white z-[1001] p-2">
+        <Link href="/" className="text-2xl font-bold text-white z-[1001] p-2">
           GECKHOBOY
-        </a>
+        </Link>
         
         <nav className="hidden md:flex gap-8 items-center justify-center">
           {platforms.map((platform) => (

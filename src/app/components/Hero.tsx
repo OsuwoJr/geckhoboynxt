@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from './Button';
 import Image from 'next/image';
@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
         <div className="relative z-[2] text-center p-8">
           <h1 className="text-[clamp(3rem,15vw,8rem)] leading-none m-0 flex flex-col items-center gap-2">
             <span className="font-['Brush_Script_MT'] text-red-500 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)] -rotate-[5deg]">
-              It's
+              It&apos;s
             </span>
             <span className="font-['Impact'] font-black text-white uppercase tracking-[0.1em] [text-shadow:_2px_2px_0_#000,_-2px_-2px_0_#000,_2px_-2px_0_#000,_-2px_2px_0_#000]">
               GECKHOBOY
