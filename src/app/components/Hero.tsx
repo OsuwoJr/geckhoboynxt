@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
     <>
       <section 
         ref={heroRef}
-        className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-black"
+        className="relative w-full h-[100dvh] min-h-[600px] flex items-center justify-center overflow-hidden bg-black"
         role="banner"
         aria-label="Hero section"
       >
@@ -42,6 +42,11 @@ const Hero: React.FC = () => {
             priority
             className="object-cover opacity-50"
             quality={100}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
           />
         </div>
 
@@ -49,28 +54,30 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_center,rgba(0,191,255,0.1)_0%,transparent_70%)]" />
 
         {/* Content */}
-        <div className="relative z-[2] text-center p-8">
-          <h1 className="text-[clamp(3rem,15vw,8rem)] leading-none m-0 flex flex-col items-center gap-2">
-            <span className="font-['Brush_Script_MT'] text-red-500 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)] -rotate-[5deg]">
+        <div className="relative z-[2] text-center px-4 sm:px-6 md:px-8 max-w-[90vw] sm:max-w-[80vw] md:max-w-[70vw] lg:max-w-[60vw]">
+          <h1 className="text-[clamp(2.5rem,10vw,8rem)] leading-none m-0 flex flex-col items-center gap-2">
+            <span className="font-['Brush_Script_MT'] text-red-500 drop-shadow-[0_0_10px_rgba(255,0,0,0.5)] -rotate-[5deg] transform-gpu">
               It&apos;s
             </span>
-            <span className="font-['Impact'] font-black text-white uppercase tracking-[0.1em] [text-shadow:_2px_2px_0_#000,_-2px_-2px_0_#000,_2px_-2px_0_#000,_-2px_2px_0_#000]">
+            <span className="font-['Impact'] font-black text-white uppercase tracking-[0.1em] [text-shadow:_2px_2px_0_#000,_-2px_-2px_0_#000,_2px_-2px_0_#000,_-2px_2px_0_#000] transform-gpu">
               GECKHOBOY
             </span>
           </h1>
 
-          <div className="flex gap-4 justify-center flex-wrap mt-8 md:flex-row flex-col">
+          <div className="flex gap-4 justify-center flex-wrap mt-8 md:flex-row flex-col w-full max-w-[400px] mx-auto">
             <Button 
               text="Explore Merch" 
               variant="primary" 
               size="lg" 
-              onClick={scrollToFeaturedProducts} 
+              onClick={scrollToFeaturedProducts}
+              fullWidth
             />
             <Button 
               text="Book Now" 
               variant="secondary" 
               size="lg" 
-              onClick={navigateToBooking} 
+              onClick={navigateToBooking}
+              fullWidth
             />
           </div>
         </div>

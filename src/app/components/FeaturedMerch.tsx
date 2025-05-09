@@ -19,7 +19,7 @@ const products: Product[] = [
     id: 'classic-tee',
     name: 'GECKHOBOY Classic Tee',
     description: 'Premium quality cotton t-shirt with the iconic GECKHOBOY logo.',
-    price: 2500,
+    price: 1500,
     image: '/images/classic-tee-front.jpg',
     backImage: '/images/classic-tee-back.jpg'
   },
@@ -27,7 +27,7 @@ const products: Product[] = [
     id: 'street-hoodie',
     name: 'Street Style Hoodie',
     description: 'Comfortable and stylish hoodie perfect for any occasion.',
-    price: 4500,
+    price: 3500,
     image: '/images/hoodie-front.jpg',
     backImage: '/images/hoodie-back.jpg'
   },
@@ -35,7 +35,7 @@ const products: Product[] = [
     id: 'urban-cap',
     name: 'Urban Cap',
     description: 'Classic cap with embroidered GECKHOBOY branding.',
-    price: 1800,
+    price: 1000,
     image: '/images/cap-front.jpg',
     backImage: '/images/cap-back.jpg'
   }

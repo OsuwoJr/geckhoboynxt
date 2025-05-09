@@ -27,7 +27,8 @@ const platforms = [
     href: 'https://music.apple.com/us/artist/geckhoboy/1810874244',
     icon: faApple,
     color: '#FB2D3F',
-    hoverColor: '#ff1a1a'
+    hoverColor: '#ff1a1a',
+    className: 'whitespace-nowrap'
   },
   { 
     name: 'Boomplay',
@@ -57,7 +58,7 @@ const Header: React.FC = () => {
             <a 
               key={platform.name}
               href={platform.href}
-              className="text-decoration-none text-[var(--platform-color)] p-2 transition-colors duration-200 flex items-center gap-2 hover:text-[var(--platform-hover-color)]"
+              className={`text-decoration-none text-[var(--platform-color)] p-2 transition-colors duration-200 flex items-center gap-2 hover:text-[var(--platform-hover-color)] ${platform.className || ''}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -65,7 +66,7 @@ const Header: React.FC = () => {
                 '--platform-hover-color': platform.hoverColor
               } as React.CSSProperties}
             >
-              <FontAwesomeIcon icon={platform.icon} />
+              <FontAwesomeIcon icon={platform.icon} className="flex-shrink-0" />
               <span className="hidden md:inline">{platform.name}</span>
             </a>
           ))}
@@ -89,7 +90,7 @@ const Header: React.FC = () => {
             <a 
               key={platform.name}
               href={platform.href}
-              className="text-decoration-none text-[var(--platform-color)] p-4 transition-all duration-200 flex items-center gap-4 text-lg rounded-lg bg-white/5 hover:text-[var(--platform-hover-color)] hover:bg-white/10"
+              className={`text-decoration-none text-[var(--platform-color)] p-4 transition-all duration-200 flex items-center gap-4 text-lg rounded-lg bg-white/5 hover:text-[var(--platform-hover-color)] hover:bg-white/10 ${platform.className || ''}`}
               target="_blank"
               rel="noopener noreferrer"
               onClick={toggleMenu}
@@ -98,7 +99,7 @@ const Header: React.FC = () => {
                 '--platform-hover-color': platform.hoverColor
               } as React.CSSProperties}
             >
-              <FontAwesomeIcon icon={platform.icon} className="text-2xl w-6 text-center" />
+              <FontAwesomeIcon icon={platform.icon} className="text-2xl w-6 text-center flex-shrink-0" />
               <span>{platform.name}</span>
             </a>
           ))}

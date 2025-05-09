@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCartStore } from '../store/cartStore';
 import Image from 'next/image';
+import '../styles/cart.css';
 
 interface FormData {
   name: string;
@@ -12,6 +13,7 @@ interface FormData {
   city: string;
   stage: string;
   notes: string;
+  transactionId: string;
 }
 
 export default function Cart() {
@@ -19,6 +21,8 @@ export default function Cart() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [paymentCompleted, setPaymentCompleted] = useState(false);
 
   const { items, removeItem, updateQuantity, clearCart, getTotal } = useCartStore();
   const total = getTotal();
@@ -30,7 +34,8 @@ export default function Cart() {
     address: '',
     city: '',
     stage: '',
-    notes: ''
+    notes: '',
+    transactionId: ''
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -51,11 +56,23 @@ export default function Cart() {
   };
 
   const proceedToCheckout = () => {
+    console.log('Proceeding to checkout...');
     setIsCheckingOut(true);
+  };
+
+  const handlePaymentComplete = () => {
+    setPaymentCompleted(true);
+    setIsPaymentModalOpen(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!paymentCompleted) {
+      setErrorMessage('Please complete the payment first');
+      return;
+    }
+
     try {
       const orderDetails = items.map(item => ({
         name: item.name,
@@ -72,7 +89,9 @@ export default function Cart() {
         body: JSON.stringify({
           ...formData,
           orderDetails,
-          totalAmount: total
+          totalAmount: total,
+          paymentStatus: 'Completed',
+          paymentMethod: 'Swypt'
         })
       });
 
@@ -86,8 +105,10 @@ export default function Cart() {
           address: '',
           city: '',
           stage: '',
-          notes: ''
+          notes: '',
+          transactionId: ''
         });
+        setPaymentCompleted(false);
       } else {
         setErrorMessage('Failed to submit order. Please try again.');
       }
@@ -112,6 +133,17 @@ export default function Cart() {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
+  // Add debug logging
+  useEffect(() => {
+    console.log('Cart state:', {
+      isOpen,
+      isCheckingOut,
+      showSuccess,
+      items: items.length,
+      total
+    });
+  }, [isOpen, isCheckingOut, showSuccess, items, total]);
 
   return (
     <div className="cart-wrapper">
@@ -232,6 +264,19 @@ export default function Cart() {
                 ></textarea>
               </div>
 
+              <div className="form-group">
+                <label htmlFor="transactionId">Transaction ID *</label>
+                <input 
+                  type="text" 
+                  id="transactionId" 
+                  name="transactionId"
+                  value={formData.transactionId}
+                  onChange={handleInputChange}
+                  required 
+                  placeholder="Enter your Swypt transaction ID"
+                />
+              </div>
+
               {errorMessage && (
                 <div className="error-message">
                   {errorMessage}
@@ -262,7 +307,22 @@ export default function Cart() {
                 >
                   Back to Cart
                 </button>
-                <button type="submit" className="submit-btn">
+                <button 
+                  type="button" 
+                  className="payment-btn"
+                  onClick={() => {
+                    // Open Swypt payment in a new window
+                    window.open('https://swypt.io/pay', '_blank');
+                    setIsPaymentModalOpen(true);
+                  }}
+                >
+                  Pay Now
+                </button>
+                <button 
+                  type="submit" 
+                  className="submit-btn"
+                  disabled={!paymentCompleted}
+                >
                   Place Order
                 </button>
               </div>
@@ -298,8 +358,22 @@ export default function Cart() {
                   <span>Total:</span>
                   <span className="total-amount">KES {total.toLocaleString()}</span>
                 </div>
-                <button className="checkout-btn" onClick={proceedToCheckout}>
-                  Proceed to Checkout
+                <button 
+                  className="checkout-btn" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Checkout button clicked');
+                    console.log('Current cart state:', {
+                      isOpen,
+                      isCheckingOut,
+                      items: items.length,
+                      total
+                    });
+                    proceedToCheckout();
+                  }}
+                >
+                  Proceed to Checkout ({items.length} items)
                 </button>
               </div>
             </>

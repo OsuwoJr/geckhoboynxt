@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useCartStore } from '../store/cartStore';
 import type { CartStore } from '../store/cartStore';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface MerchItem {
   id: string;
@@ -32,7 +33,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "ma-1",
         name: "Miles Apart Classic Tee",
-        price: 2500,
+        price: 1200,
         image: "/images/ma-tee-1.jpg",
         backImage: "/images/ma-tee-1-back.jpg",
         description: "Premium cotton t-shirt featuring Miles Apart artwork"
@@ -40,7 +41,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "ma-2",
         name: "Miles Apart Graphic Tee",
-        price: 2800,
+        price: 1500,
         image: "/images/ma-tee-2.jpg",
         backImage: "/images/ma-tee-2-back.jpg",
         description: "Limited edition graphic t-shirt with exclusive design"
@@ -48,7 +49,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "ma-3",
         name: "Miles Apart Deluxe Tee",
-        price: 3000,
+        price: 1000,
         image: "/images/ma-tee-3.jpg",
         backImage: "/images/ma-tee-3-back.jpg",
         description: "Premium deluxe edition with special packaging"
@@ -56,7 +57,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "ma-art",
         name: "Miles Apart Framed Art",
-        price: 4500,
+        price: 1500,
         image: "/images/ma-art.jpg",
         backImage: "/images/ma-art-back.jpg",
         description: "High-quality framed album artwork"
@@ -72,7 +73,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "iwik-1",
         name: "I Wish I Knew Classic Tee",
-        price: 2500,
+        price: 1200,
         image: "/images/iwik-tee-1.jpg",
         backImage: "/images/iwik-tee-1-back.jpg",
         description: "Premium cotton t-shirt featuring I Wish I Knew artwork"
@@ -80,7 +81,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "iwik-2",
         name: "I Wish I Knew Graphic Tee",
-        price: 2800,
+        price: 1500,
         image: "/images/iwik-tee-2.jpg",
         backImage: "/images/iwik-tee-2-back.jpg",
         description: "Limited edition graphic t-shirt with exclusive design"
@@ -88,7 +89,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "iwik-3",
         name: "I Wish I Knew Deluxe Tee",
-        price: 3000,
+        price: 1000,
         image: "/images/iwik-tee-3.jpg",
         backImage: "/images/iwik-tee-3-back.jpg",
         description: "Premium deluxe edition with special packaging"
@@ -96,7 +97,7 @@ const musicReleases: MusicRelease[] = [
       {
         id: "iwik-art",
         name: "I Wish I Knew Framed Art",
-        price: 4500,
+        price: 1500,
         image: "/images/iwik-art.jpg",
         backImage: "/images/iwik-art-back.jpg",
         description: "High-quality framed album artwork"
