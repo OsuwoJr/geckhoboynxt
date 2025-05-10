@@ -1,0 +1,134 @@
+.wallet-wrapper {
+  position: relative;
+}
+
+.wallet-toggle {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.wallet-toggle:hover {
+  color: #a0b921;
+}
+
+.wallet-connected {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+}
+
+.wallet-container {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: #1a1a1a;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.wallet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #333333;
+}
+
+.wallet-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+.wallet-content {
+  padding: 1rem;
+}
+
+.error-message {
+  color: #ff4444;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.connect-wallet-btn,
+.disconnect-wallet-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.connect-wallet-btn {
+  background-color: #a0b921;
+  color: black;
+}
+
+.disconnect-wallet-btn {
+  background-color: #333333;
+  color: white;
+}
+
+.connect-wallet-btn:hover,
+.disconnect-wallet-btn:hover {
+  opacity: 0.9;
+}
+
+.wallet-info {
+  margin-bottom: 1rem;
+}
+
+.wallet-address {
+  color: #a0b921;
+  font-family: monospace;
+  margin-bottom: 0.5rem;
+}
+
+.wallet-balance {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .wallet-container {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    margin-top: 0;
+  }
+} 

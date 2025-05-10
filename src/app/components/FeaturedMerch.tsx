@@ -11,7 +11,8 @@ interface Product {
   description: string;
   price: number;
   image: string;
-  backImage: string;
+  backImage?: string;
+  type: 'merch' | 'sticker';
 }
 
 const products: Product[] = [
@@ -21,7 +22,8 @@ const products: Product[] = [
     description: 'Premium quality cotton t-shirt with the iconic GECKHOBOY logo.',
     price: 1500,
     image: '/images/classic-tee-front.jpg',
-    backImage: '/images/classic-tee-back.jpg'
+    backImage: '/images/classic-tee-back.jpg',
+    type: 'merch'
   },
   {
     id: 'street-hoodie',
@@ -29,7 +31,8 @@ const products: Product[] = [
     description: 'Comfortable and stylish hoodie perfect for any occasion.',
     price: 3500,
     image: '/images/hoodie-front.jpg',
-    backImage: '/images/hoodie-back.jpg'
+    backImage: '/images/hoodie-back.jpg',
+    type: 'merch'
   },
   {
     id: 'urban-cap',
@@ -37,7 +40,41 @@ const products: Product[] = [
     description: 'Classic cap with embroidered GECKHOBOY branding.',
     price: 1000,
     image: '/images/cap-front.jpg',
-    backImage: '/images/cap-back.jpg'
+    backImage: '/images/cap-back.jpg',
+    type: 'merch'
+  },
+  
+  {
+    id: 'neon-signature',
+    name: 'Neon Signature Sticker',
+    description: 'Vibrant neon-style GECKHOBOY signature sticker.',
+    price: 350,
+    image: '/images/sticker-neon.jpg',
+    type: 'sticker'
+  },
+  {
+    id: 'genesis-sticker',
+    name: 'Genesis Sticker',
+    description: 'The Origin ',
+    price: 350,
+    image: '/images/sticker-glow.jpg',
+    type: 'sticker'
+  },
+  {
+    id: 'exodus-sticker',
+    name: 'Exodus Sticker',
+    description: 'The Journey ',
+    price: 350,
+    image: '/images/sticker-silhouette.jpg',
+    type: 'sticker'
+  },
+  {
+    id: 'revelation-sticker',
+    name: 'Revelation Sticker',
+    description: 'The Future ',
+    price: 350,
+    image: '/images/sticker-holographic.jpg',
+    type: 'sticker'
   }
 ];
 
@@ -70,14 +107,19 @@ const FeaturedMerch: React.FC = () => {
     });
   };
 
+  const merchProducts = products.filter(product => product.type === 'merch');
+  const stickerProducts = products.filter(product => product.type === 'sticker');
+
   return (
     <section className="py-16 px-4 bg-black text-white" id="featured-products">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-4xl mb-12 text-[#a0b921] uppercase tracking-wider font-['Impact']">
           Featured Products
         </h2>
+        
+        {/* Merch Products */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
-          {products.map((product) => (
+          {merchProducts.map((product) => (
             <div 
               key={product.id}
               className={`product-card bg-[rgba(17,17,17,0.8)] rounded-2xl overflow-hidden transition-transform duration-300 hover:-translate-y-1 border border-[rgba(160,185,33,0.1)] ${
@@ -103,14 +145,16 @@ const FeaturedMerch: React.FC = () => {
                     />
                   </div>
                   <div className="absolute w-full h-full backface-hidden rotate-y-180 flex items-center justify-center p-4">
-                    <Image
-                      src={product.backImage}
-                      alt={`${product.name} back`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-contain"
-                      priority
-                    />
+                    {product.backImage && (
+                      <Image
+                        src={product.backImage}
+                        alt={`${product.name} back`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-contain"
+                        priority
+                      />
+                    )}
                   </div>
                 </div>
               </div>
@@ -131,6 +175,47 @@ const FeaturedMerch: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Stickers Section */}
+        <div className="mt-16">
+          <h3 className="text-center text-3xl mb-8 text-[#a0b921] uppercase tracking-wider font-['Impact']">
+            Stickers Collection
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
+            {stickerProducts.map((sticker) => (
+              <div 
+                key={sticker.id}
+                className="bg-[rgba(17,17,17,0.8)] rounded-xl overflow-hidden transition-transform duration-300 hover:-translate-y-1 border border-[rgba(160,185,33,0.1)]"
+              >
+                <div className="relative w-full h-[200px]">
+                  <Image
+                    src={sticker.image}
+                    alt={sticker.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    className="object-contain p-4"
+                    priority
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg mb-2 text-white">{sticker.name}</h3>
+                  <p className="text-gray-400 mb-3 text-sm">
+                    {sticker.description}
+                  </p>
+                  <p className="text-xl font-bold text-[#a0b921] mb-3">
+                    KES {sticker.price.toLocaleString()}
+                  </p>
+                  <button
+                    onClick={() => addToCart(sticker)}
+                    className="w-full py-2 bg-[#a0b921] text-black rounded-lg font-semibold transition-colors duration-300 hover:bg-[#8aa31d]"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
