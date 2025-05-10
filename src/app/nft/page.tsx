@@ -300,7 +300,7 @@ export default function NFTPage() {
               <div className="bg-[#1a1a1a] p-4 sm:p-6 rounded-lg">
                 <h3 className="text-lg sm:text-xl font-bold mb-2">How do I purchase an NFT?</h3>
                 <p className="text-gray-400 text-sm sm:text-base">
-                  You'll need a cryptocurrency wallet and some ETH to purchase NFTs. Detailed instructions will be provided when NFTs are released.
+                  You&apos;ll need a cryptocurrency wallet and some ETH to purchase NFTs. Detailed instructions will be provided when NFTs are released.
                 </p>
               </div>
               <div className="bg-[#1a1a1a] p-4 sm:p-6 rounded-lg">
