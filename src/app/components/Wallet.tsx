@@ -20,14 +20,17 @@ export default function Wallet() {
   const connectWallet = async () => {
     try {
       if (typeof window.ethereum !== 'undefined') {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' }) as string[];
+        if (!accounts || accounts.length === 0) {
+          throw new Error('No accounts found');
+        }
         const address = accounts[0];
         
         // Get balance
         const balance = await window.ethereum.request({
           method: 'eth_getBalance',
           params: [address, 'latest']
-        });
+        }) as string;
         
         // Convert balance from wei to ETH
         const balanceInEth = (parseInt(balance, 16) / 1e18).toFixed(4);
