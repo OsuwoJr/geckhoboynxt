@@ -56,11 +56,8 @@ const nftCollection: NFT[] = [
         return;
       }
       try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const account = accounts[0];
-        
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
         // Here you would typically interact with your smart contract
-        // For now, we'll just show a success message
         alert('Minting Genesis Pass... This is a placeholder for the actual minting process.');
       } catch (error) {
         console.error('Error minting:', error);
@@ -101,11 +98,8 @@ const nftCollection: NFT[] = [
         return;
       }
       try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const account = accounts[0];
-        
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
         // Here you would typically interact with your smart contract
-        // For now, we'll just show a success message
         alert('Minting Exodus Pass... This is a placeholder for the actual minting process.');
       } catch (error) {
         console.error('Error minting:', error);
@@ -141,11 +135,8 @@ const nftCollection: NFT[] = [
         return;
       }
       try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const account = accounts[0];
-        
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
         // Here you would typically interact with your smart contract
-        // For now, we'll just show a success message
         alert('Minting Revelation Pass... This is a placeholder for the actual minting process.');
       } catch (error) {
         console.error('Error minting:', error);
