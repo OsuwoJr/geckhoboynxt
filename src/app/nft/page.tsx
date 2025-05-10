@@ -2,8 +2,10 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { useWeb3 } from '@/components/Web3Provider';
+import { mintNFT } from '@/utils/contract';
 
 interface NFT {
   id: string;
@@ -18,7 +20,7 @@ interface NFT {
   }[];
   status: 'upcoming' | 'available' | 'sold';
   color: string;
-  mintFunction: () => Promise<void>;
+  tokenURI: string;
 }
 
 const nftCollection: NFT[] = [
@@ -27,9 +29,10 @@ const nftCollection: NFT[] = [
     name: 'GECKHO GENESIS PASS',
     description: '"The Origin"',
     image: '/images/genesis-pass.jpg',
-    price: '0.05 ETH',
+    price: '0.05',
     supply: '100 NFTs',
     color: '#a0b921',
+    tokenURI: 'ipfs://your-genesis-pass-metadata-uri',
     benefits: [
       {
         category: '🎁 Access & Utility Perks',
@@ -48,30 +51,17 @@ const nftCollection: NFT[] = [
         ]
       }
     ],
-    status: 'upcoming',
-    mintFunction: async () => {
-      if (typeof window.ethereum === 'undefined') {
-        alert('Please install MetaMask to mint NFTs');
-        return;
-      }
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        // Here you would typically interact with your smart contract
-        alert('Minting Genesis Pass... This is a placeholder for the actual minting process.');
-      } catch (error) {
-        console.error('Error minting:', error);
-        alert('Failed to mint NFT. Please try again.');
-      }
-    }
+    status: 'available'
   },
   {
     id: 'exodus-pass',
     name: 'EXODUS PASS',
     description: '"The Journey"',
     image: '/images/exodus-pass.jpg',
-    price: '0.08 ETH',
+    price: '0.08',
     supply: '250 NFTs',
     color: '#FFD700',
+    tokenURI: 'ipfs://your-exodus-pass-metadata-uri',
     benefits: [
       {
         category: '🚀 Core Perks',
@@ -90,30 +80,17 @@ const nftCollection: NFT[] = [
         ]
       }
     ],
-    status: 'upcoming',
-    mintFunction: async () => {
-      if (typeof window.ethereum === 'undefined') {
-        alert('Please install MetaMask to mint NFTs');
-        return;
-      }
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        // Here you would typically interact with your smart contract
-        alert('Minting Exodus Pass... This is a placeholder for the actual minting process.');
-      } catch (error) {
-        console.error('Error minting:', error);
-        alert('Failed to mint NFT. Please try again.');
-      }
-    }
+    status: 'available'
   },
   {
     id: 'revelation-pass',
     name: 'REVELATION PASS',
     description: '"The Future"',
     image: '/images/revelation-pass.jpg',
-    price: '0.2 ETH',
+    price: '0.2',
     supply: '50 NFTs',
     color: '#4169E1',
+    tokenURI: 'ipfs://your-revelation-pass-metadata-uri',
     benefits: [
       {
         category: '💎 Premium Collector Perks',
@@ -127,31 +104,28 @@ const nftCollection: NFT[] = [
         ]
       }
     ],
-    status: 'upcoming',
-    mintFunction: async () => {
-      if (typeof window.ethereum === 'undefined') {
-        alert('Please install MetaMask to mint NFTs');
-        return;
-      }
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        // Here you would typically interact with your smart contract
-        alert('Minting Revelation Pass... This is a placeholder for the actual minting process.');
-      } catch (error) {
-        console.error('Error minting:', error);
-        alert('Failed to mint NFT. Please try again.');
-      }
-    }
+    status: 'available'
   }
 ];
 
 export default function NFTPage() {
   const [minting, setMinting] = useState<string | null>(null);
+  const { account, provider, connect } = useWeb3();
 
   const handleMint = async (nft: NFT) => {
+    if (!account || !provider) {
+      await connect();
+      return;
+    }
+
     setMinting(nft.id);
     try {
-      await nft.mintFunction();
+      const tx = await mintNFT(provider, nft.tokenURI, nft.price);
+      await tx.wait();
+      alert(`Successfully minted ${nft.name}!`);
+    } catch (error) {
+      console.error('Error minting NFT:', error);
+      alert('Failed to mint NFT. Please try again.');
     } finally {
       setMinting(null);
     }
@@ -220,7 +194,7 @@ export default function NFTPage() {
                     <div className="flex justify-between items-center mb-4">
                       <span className="text-sm sm:text-base text-gray-400">Supply: {nft.supply}</span>
                       <span className="text-lg sm:text-xl font-bold" style={{ color: nft.color }}>
-                        {nft.price}
+                        {nft.price} ETH
                       </span>
                     </div>
                     {nft.benefits.map((benefitGroup, groupIndex) => (
@@ -243,12 +217,14 @@ export default function NFTPage() {
                     >
                       {minting === nft.id ? (
                         'Minting...'
+                      ) : !account ? (
+                        'Connect Wallet'
                       ) : nft.id === 'genesis-pass' ? (
                         'Join the Genesis'
                       ) : nft.id === 'exodus-pass' ? (
                         'Begin the Exodus'
                       ) : (
-                        'Ascend Now'
+                        'Enter the Revelation'
                       )}
                     </button>
                   </div>
