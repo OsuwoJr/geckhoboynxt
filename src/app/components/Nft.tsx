@@ -143,7 +143,7 @@ const Nft = () => {
 
         {/* NFT Tiers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {nftTiers.map((tier, index) => (
+          {nftTiers.map((tier) => (
             <div 
               key={tier.name}
               className={`relative bg-gradient-to-br ${tier.gradient} rounded-2xl p-6 border ${tier.borderColor} ${tier.hoverBorderColor} transition-all duration-300 group hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(var(--tier-color-rgb),0.2)]`}
@@ -208,14 +208,14 @@ const Nft = () => {
 
               {/* Features List */}
               <div className="space-y-6 mb-6">
-                {tier.features.map((featureGroup, groupIdx) => (
-                  <div key={groupIdx}>
+                {tier.features.map((featureGroup) => (
+                  <div key={featureGroup.category}>
                     <h4 className={`text-${tier.color}-500 font-semibold mb-3 text-sm uppercase tracking-wider`}>
                       {featureGroup.category}
                     </h4>
                     <ul className="space-y-2">
-                      {featureGroup.items.map((feature, idx) => (
-                        <li key={idx} className="flex items-center text-sm group/item">
+                      {featureGroup.items.map((feature) => (
+                        <li key={feature} className="flex items-center text-sm group/item">
                           <span className={`text-${tier.color}-500 mr-2 group-hover/item:scale-110 transition-transform duration-200`}>•</span>
                           {feature}
                         </li>
