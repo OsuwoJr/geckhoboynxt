@@ -43,7 +43,6 @@ export const getContract = (provider: ethers.providers.Web3Provider) => {
 // Mint NFT function
 export const mintNFT = async (
   provider: ethers.providers.Web3Provider,
-  tokenId: number,
   tokenURI: string
 ) => {
   try {
@@ -112,8 +111,7 @@ export const getNFTBalance = async (provider: ethers.providers.Web3Provider, add
 
 // Get NFT collection info
 export const getNFTInfo = async (
-  provider: ethers.providers.Web3Provider,
-  tokenId: number
+  provider: ethers.providers.Web3Provider
 ) => {
   try {
     if (!provider) {
