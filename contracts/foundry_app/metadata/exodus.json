@@ -1,0 +1,31 @@
+{
+  "name": "GECKHO EXODUS PASS",
+  "description": "The Journey - The next level of GECKHO experience",
+  "image": "ipfs://QmExodusPassImage",
+  "attributes": [
+    {
+      "trait_type": "Type",
+      "value": "Exodus Pass"
+    },
+    {
+      "trait_type": "Supply",
+      "value": "250"
+    },
+    {
+      "trait_type": "Price",
+      "value": "0.08 ETH"
+    }
+  ],
+  "properties": {
+    "perks": [
+      "Behind-the-Scenes Creation Access",
+      "Private Discord Access + AMAs",
+      "Vault Access to Unreleased Content",
+      "Enhanced Voting Power",
+      "Annual Artist Airdrop"
+    ],
+    "bonus_utility": [
+      "Trait Evolution: Ascended Exodus"
+    ]
+  }
+} 

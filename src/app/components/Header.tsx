@@ -7,7 +7,6 @@ import { faYoutube, faSpotify, faApple } from '@fortawesome/free-brands-svg-icon
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Cart from './Cart';
-import Wallet from './Wallet';
 
 const platforms = [
   { 
@@ -44,7 +43,6 @@ const platforms = [
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isNFTPage = pathname === '/nft';
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -67,12 +65,6 @@ const Header: React.FC = () => {
         </Link>
         
         <nav className="hidden md:flex gap-8 items-center justify-center">
-          <Link 
-            href="/nft" 
-            className="text-[#a0b921] hover:text-[#8aa31d] transition-colors duration-200"
-          >
-            NFT Collection
-          </Link>
           {platforms.map((platform) => (
             <a 
               key={platform.name}
@@ -92,7 +84,7 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="flex items-center gap-6 justify-end z-[1001]">
-          {isNFTPage ? <Wallet /> : <Cart />}
+          <Cart />
           <button 
             className="bg-transparent border-none text-2xl cursor-pointer p-2 text-white flex items-center justify-center w-10 h-10 rounded transition-colors duration-200 hover:bg-white/10 md:hidden"
             onClick={toggleMenu}
@@ -105,13 +97,6 @@ const Header: React.FC = () => {
 
       {isMenuOpen && (
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black p-20 pt-20 flex flex-col gap-4 z-[1000] animate-slideIn">
-          <Link 
-            href="/nft" 
-            className="text-[#a0b921] p-4 transition-all duration-200 flex items-center gap-4 text-lg rounded-lg bg-white/5 hover:text-[#8aa31d] hover:bg-white/10"
-            onClick={toggleMenu}
-          >
-            <span>NFT Collection</span>
-          </Link>
           {platforms.map((platform) => (
             <a 
               key={platform.name}

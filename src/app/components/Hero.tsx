@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-[1]">
           <Image
-            src="/images/hero-bg.jpg"
+            src="/images/ma-art.jpg"
             alt="Hero background"
             fill
             priority
