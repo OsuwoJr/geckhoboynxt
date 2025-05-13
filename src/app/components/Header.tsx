@@ -63,6 +63,18 @@ const Header: React.FC = () => {
         </Link>
         
         <nav className="hidden md:flex gap-8 items-center justify-center">
+          <Link 
+            href="/nft" 
+            className="text-white hover:text-[#a0b921] transition-colors duration-200"
+          >
+            NFTs
+          </Link>
+          <Link 
+            href="/subscription" 
+            className="text-white hover:text-[#a0b921] transition-colors duration-200"
+          >
+            Subscribe
+          </Link>
           {platforms.map((platform) => (
             <a 
               key={platform.name}
@@ -95,6 +107,20 @@ const Header: React.FC = () => {
 
       {isMenuOpen && (
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-black p-20 pt-20 flex flex-col gap-4 z-[1000] animate-slideIn">
+          <Link 
+            href="/nft" 
+            className="text-white hover:text-[#a0b921] transition-colors duration-200 p-4 text-lg rounded-lg bg-white/5 hover:bg-white/10"
+            onClick={toggleMenu}
+          >
+            NFTs
+          </Link>
+          <Link 
+            href="/subscription" 
+            className="text-white hover:text-[#a0b921] transition-colors duration-200 p-4 text-lg rounded-lg bg-white/5 hover:bg-white/10"
+            onClick={toggleMenu}
+          >
+            Subscribe
+          </Link>
           {platforms.map((platform) => (
             <a 
               key={platform.name}

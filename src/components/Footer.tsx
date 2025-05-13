@@ -26,6 +26,9 @@ const Footer = () => {
               <Link href="/merch" className="text-gray-400 hover:text-white text-sm">
                 Merch
               </Link>
+              <Link href="/nft" className="text-gray-400 hover:text-white text-sm">
+                NFTs
+              </Link>
             </div>
           </div>
 
