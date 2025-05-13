@@ -19,23 +19,14 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-white text-sm">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/nft" className="text-gray-400 hover:text-white text-sm">
-                  NFTs
-                </Link>
-              </li>
-              <li>
-                <Link href="/cart" className="text-gray-400 hover:text-white text-sm">
-                  Cart
-                </Link>
-              </li>
-            </ul>
+            <div className="flex flex-col space-y-2">
+              <Link href="/" className="text-gray-400 hover:text-white text-sm">
+                Home
+              </Link>
+              <Link href="/merch" className="text-gray-400 hover:text-white text-sm">
+                Merch
+              </Link>
+            </div>
           </div>
 
           {/* Social Links */}
