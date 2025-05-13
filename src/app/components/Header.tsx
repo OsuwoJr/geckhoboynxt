@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMusic } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube, faSpotify, faApple } from '@fortawesome/free-brands-svg-icons';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import Cart from './Cart';
 
 const platforms = [
@@ -42,7 +41,6 @@ const platforms = [
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);

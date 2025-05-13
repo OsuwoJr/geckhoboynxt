@@ -157,7 +157,6 @@ export const getNFTInfo = async (
 // Check if address is whitelisted
 export const isWhitelisted = async (
   provider: ethers.providers.Web3Provider,
-  tokenId: number,
   address: string
 ) => {
   try {
