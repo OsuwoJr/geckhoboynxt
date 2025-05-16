@@ -1,5 +1,4 @@
 import React from 'react';
-import type { JSX } from 'react';
 
 interface SubscriptionFormProps {
   isOpen: boolean;
@@ -66,7 +65,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ isOpen, onClose, se
       } else {
         throw new Error('Failed to submit form');
       }
-    } catch (err) {
+    } catch (_error) {
       setError('Failed to submit form. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -90,7 +89,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ isOpen, onClose, se
             <div className="text-green-500 text-5xl mb-4">✓</div>
             <h3 className="text-2xl font-bold text-white mb-2">Registration Successful!</h3>
             <p className="text-gray-400 mb-6">
-              Thank you for joining {selectedTier?.name}. We'll verify your payment and contact you shortly.
+              Thank you for joining {selectedTier?.name}. We&apos;ll verify your payment and contact you shortly.
             </p>
             <button
               onClick={onClose}
