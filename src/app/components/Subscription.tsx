@@ -4,6 +4,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSeedling, faFire, faCrown } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import SubscriptionForm from './SubscriptionForm';
 
 const subscriptionTiers = [
   {
@@ -19,7 +20,7 @@ const subscriptionTiers = [
     buttonColor: 'bg-green-500 hover:bg-green-600',
     symbol: faSeedling,
     buttonText: 'Join Echo Roots',
-    price: '$3',
+    price: 'KES 500',
     period: 'month',
     image: '/images/subscription/echo-roots.jpg',
     members: 128,
@@ -55,7 +56,7 @@ const subscriptionTiers = [
     buttonColor: 'bg-red-500 hover:bg-red-600',
     symbol: faFire,
     buttonText: 'Join Fire Signals',
-    price: '$7',
+    price: 'KES 1,000',
     period: 'month',
     image: '/images/subscription/fire-signals.jpg',
     members: 64,
@@ -91,7 +92,7 @@ const subscriptionTiers = [
     buttonColor: 'bg-purple-500 hover:bg-purple-600',
     symbol: faCrown,
     buttonText: 'Join Realm Keepers',
-    price: '$15',
+    price: 'KES 2,000',
     period: 'month',
     image: '/images/subscription/realm-keepers.jpg',
     members: 32,
@@ -119,6 +120,14 @@ const subscriptionTiers = [
 ];
 
 const Subscription = () => {
+  const [selectedTier, setSelectedTier] = React.useState<{name: string; price: string} | null>(null);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const handleSubscribe = (tier: { name: string; price: string }) => {
+    setSelectedTier(tier);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -211,6 +220,7 @@ const Subscription = () => {
 
               {/* Subscribe Button */}
               <button
+                onClick={() => handleSubscribe({ name: tier.name, price: tier.price })}
                 className={`w-full py-3 px-6 rounded-lg ${tier.buttonColor} text-white font-medium transition-all duration-200 hover:shadow-lg hover:shadow-${tier.color}-500/20 hover:-translate-y-0.5`}
               >
                 {tier.buttonText}
@@ -250,6 +260,13 @@ const Subscription = () => {
           </div>
         </div>
       </div>
+
+      {/* Subscription Form Modal */}
+      <SubscriptionForm
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedTier={selectedTier}
+      />
     </div>
   );
 };
