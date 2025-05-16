@@ -23,7 +23,6 @@ const CheckoutClient = () => {
     notes: '',
   });
 
-  const [showSuccess, setShowSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isCheckingOut, setIsCheckingOut] = useState(true);
   const [isSwyptOpen, setIsSwyptOpen] = useState(false);
@@ -32,9 +31,8 @@ const CheckoutClient = () => {
     setIsSwyptOpen(true);
   };
 
-  const handlePaymentSuccess = async (paymentData: PaymentData) => {
+  const handleModalClose = async () => {
     setIsSwyptOpen(false);
-
     try {
       const response = await fetch('/api/send-order-email', {
         method: 'POST',
@@ -43,13 +41,11 @@ const CheckoutClient = () => {
           formData,
           items,
           total,
-          paymentData,
         }),
       });
 
       if (!response.ok) throw new Error('Failed to send email');
 
-      setShowSuccess(true);
       clearCart();
       setErrorMessage('');
       setIsCheckingOut(false);
@@ -65,7 +61,7 @@ const CheckoutClient = () => {
         <CheckoutForm
           formData={formData}
           setFormData={setFormData}
-          setShowSuccess={setShowSuccess}
+          setShowSuccess={() => {}}
           setErrorMessage={setErrorMessage}
           setIsCheckingOut={setIsCheckingOut}
           errorMessage={errorMessage}
@@ -78,7 +74,7 @@ const CheckoutClient = () => {
 
       <DepositModal
         isOpen={isSwyptOpen}
-        onClose={() => setIsSwyptOpen(false)}
+        onClose={handleModalClose}
         headerBackgroundColor="linear-gradient(to right, #DD268A, #FF4040)"
         businessName="Your Business"
         merchantName="Your Merchant"

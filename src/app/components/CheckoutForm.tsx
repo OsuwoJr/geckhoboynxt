@@ -1,4 +1,4 @@
-import React, { FormEvent, ChangeEvent } from 'react';
+import React from 'react';
 import type { CartItem } from '../store/cartStore';
 
 export interface FormData {
