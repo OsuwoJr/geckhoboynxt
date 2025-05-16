@@ -3,12 +3,6 @@ import { CheckoutForm, FormData } from './CheckoutForm';
 import { DepositModal } from 'swypt-checkout';
 import { useCartStore } from '../store/cartStore';
 
-interface PaymentData {
-  transactionId: string;
-  status: string;
-  amount: number;
-}
-
 const CheckoutClient = () => {
   const { items, clearCart, getTotal } = useCartStore();
   const total = getTotal();
