@@ -1,6 +1,5 @@
-import React from 'react';
-import { useCartStore } from '../store/cartStore';
-import { CartItem } from '../store/cartStore';
+import React, { FormEvent, ChangeEvent } from 'react';
+import type { CartItem } from '../store/cartStore';
 
 export interface FormData {
   name: string;
@@ -22,14 +21,12 @@ export interface CheckoutFormProps {
   items: CartItem[];
   total: number;
   clearCart: () => void;
-  onPlaceOrderClick: () => void; // new prop
+  onPlaceOrderClick: () => void;
 }
 
 export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   formData,
   setFormData,
-  setShowSuccess,
-  setErrorMessage,
   setIsCheckingOut,
   errorMessage,
   onPlaceOrderClick,
@@ -39,18 +36,94 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Remove handleSubmit or keep only to prevent form submit on Enter key
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   };
 
   return (
     <form className="checkout-form" onSubmit={handleSubmit}>
-      {/* Your form inputs here */}
+      <div className="form-group">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Full Name"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email Address"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder="Phone Number"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <input
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Street Address"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <input
+          type="text"
+          name="city"
+          value={formData.city}
+          onChange={handleChange}
+          placeholder="City / Town"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <input
+          type="text"
+          name="stage"
+          value={formData.stage}
+          onChange={handleChange}
+          placeholder="Stage / Landmark"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <textarea
+          name="notes"
+          value={formData.notes}
+          onChange={handleChange}
+          placeholder="Additional notes (optional)"
+        />
+      </div>
+
+      {errorMessage && (
+        <div className="error-message">{errorMessage}</div>
+      )}
 
       <button
         className="checkout-btn"
-        type="button" // IMPORTANT: prevent default form submit
+        type="button"
         onClick={onPlaceOrderClick}
       >
         Place Order
