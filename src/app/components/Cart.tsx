@@ -72,7 +72,7 @@ export default function Cart() {
             <div className="success-message">
               <i className="fas fa-check-circle"></i>
               <h4>Order Placed Successfully!</h4>
-              <p>Thank you for your order. We'll contact you shortly with the next steps.</p>
+              <p>Thank you for your order. We&apos;ll contact you shortly with the next steps.</p>
               <button className="continue-shopping" onClick={() => setIsOpen(false)}>
                 Continue Shopping
               </button>
