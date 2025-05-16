@@ -51,17 +51,19 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     }
 
     try {
-      const response = await fetch('/api/send-order-email', {
+      const response = await fetch('https://formspree.io/f/xbloyloq', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          formData,
-          items,
-          total
+          ...formData,
+          orderItems: items.map(item => `${item.name} (${item.quantity}x) - KES ${item.price}`).join('\n'),
+          orderTotal: `KES ${total.toLocaleString()}`
         })
       });
 
-      if (!response.ok) throw new Error('Failed to send email');
+      if (!response.ok) throw new Error('Failed to send order');
 
       setShowSuccess(true);
       clearCart();
