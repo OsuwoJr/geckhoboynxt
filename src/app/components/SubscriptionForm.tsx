@@ -65,7 +65,7 @@ const SubscriptionForm: React.FC<SubscriptionFormProps> = ({ isOpen, onClose, se
       } else {
         throw new Error('Failed to submit form');
       }
-    } catch (_error) {
+    } catch {
       setError('Failed to submit form. Please try again.');
     } finally {
       setIsSubmitting(false);
