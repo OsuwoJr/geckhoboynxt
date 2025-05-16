@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import CheckoutForm from './CheckoutFrorm';
+import {CheckoutForm} from './CheckoutForm';
 import { useCartStore } from '../store/cartStore';
 import '../styles/cart.css';
 
-import type { FormData } from './CheckoutFrorm';
+import type { FormData } from './CheckoutForm';
 
 export default function Cart() {
   const cartRef = useRef<HTMLDivElement>(null);
@@ -22,8 +22,7 @@ export default function Cart() {
     address: '',
     city: '',
     stage: '',
-    notes: '',
-    transactionId: ''
+    notes: ''
   });
 
   const { items, removeItem, updateQuantity, clearCart, getTotal } = useCartStore();
@@ -79,16 +78,17 @@ export default function Cart() {
             </div>
           ) : isCheckingOut ? (
             <CheckoutForm
-              formData={formData}
-              setFormData={setFormData}
-              setShowSuccess={setShowSuccess}
-              setErrorMessage={setErrorMessage}
-              setIsCheckingOut={setIsCheckingOut}
-              errorMessage={errorMessage}
-              items={items}
-              total={total}
-              clearCart={clearCart}
-            />
+                  formData={formData}
+                  setFormData={setFormData}
+                  setShowSuccess={setShowSuccess}
+                  setErrorMessage={setErrorMessage}
+                  setIsCheckingOut={setIsCheckingOut}
+                  errorMessage={errorMessage}
+                  items={items}
+                  total={total}
+                  clearCart={clearCart} onPlaceOrderClick={function (): void {
+                    throw new Error('Function not implemented.');
+                  } }            />
           ) : (
             <>
               <div className="cart-items">
